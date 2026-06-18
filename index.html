@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
     <script type="module" crossorigin src="./assets/index-CWBHOOU2.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DQqxLPaT.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DQqxLPaT.css" />
     <style>
       .site-footer {
         background-color: #050d14;
         color: #5e718d;
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
         padding: 4rem 1rem;
       }
       .site-footer-container {
@@ -103,17 +112,82 @@
         font-weight: 700;
         text-decoration: none;
       }
+
+      /* Fix Header Spacing constraints */
+      .sticky.top-0.z-50 > div {
+        max-width: 1400px !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+
+      .sticky.top-0.z-50 nav {
+        gap: 1.25rem !important;
+        margin-left: 1.5rem !important;
+        margin-right: 1.5rem !important;
+      }
+
+      /* Specific adjustments for laptops / medium desktops / iframe sizes */
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        .sticky.top-0.z-50 > div {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+        }
+        .sticky.top-0.z-50 nav {
+          gap: 1rem !important;
+          margin-left: 1rem !important;
+          margin-right: 1rem !important;
+        }
+        .sticky.top-0.z-50 nav a,
+        .sticky.top-0.z-50 nav button {
+          font-size: 0.85rem !important;
+        }
+        /* Make Get Quote button padding slightly snugger to fit */
+        .sticky.top-0.z-50 a[href="/contact"] {
+          padding-left: 1.1rem !important;
+          padding-right: 1.1rem !important;
+          padding-top: 0.5rem !important;
+          padding-bottom: 0.5rem !important;
+          font-size: 0.85rem !important;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .sticky.top-0.z-50 nav {
+          gap: 2rem !important;
+          margin-left: 2.5rem !important;
+          margin-right: 2.5rem !important;
+        }
+      }
+
+      /* Guarantee zero wrap and absolutely no shrink for logo and Get Quote */
+      .sticky.top-0.z-50 a,
+      .sticky.top-0.z-50 button {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+
+      .sticky.top-0.z-50 > div > div {
+        flex-shrink: 0 !important;
+      }
     </style>
   </head>
-  <body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
-    <div id="root" style="flex: 1;"></div>
-    
+  <body
+    style="margin: 0; min-height: 100vh; display: flex; flex-direction: column"
+  >
+    <div id="root" style="flex: 1"></div>
+
     <footer class="site-footer">
       <div class="site-footer-container">
         <!-- Column 1 -->
         <div>
-          <div class="footer-logo-text">KITA<span class="footer-logo-point">.</span></div>
-          <p class="footer-desc">Kita Systems India Pvt. Ltd. — water treatment manufacturer, Delhi. The only SS vessel water softener and sand filter manufacturer in India.</p>
+          <div class="footer-logo-text">
+            KITA<span class="footer-logo-point">.</span>
+          </div>
+          <p class="footer-desc">
+            Kita Systems India Pvt. Ltd. — water treatment manufacturer, Delhi.
+            The only SS vessel water softener and sand filter manufacturer in
+            India.
+          </p>
         </div>
 
         <!-- Column 2 -->
@@ -156,10 +230,11 @@
       </div>
 
       <div class="footer-bottom">
-        <div class="footer-copyright">© 2024 Kita Systems India Pvt. Ltd. All rights reserved.</div>
+        <div class="footer-copyright">
+          © 2024 Kita Systems India Pvt. Ltd. All rights reserved.
+        </div>
         <a href="tel:18002701121" class="footer-bottom-phone">18002701121</a>
       </div>
     </footer>
   </body>
 </html>
-
