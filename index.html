@@ -169,12 +169,138 @@
       .sticky.top-0.z-50 > div > div {
         flex-shrink: 0 !important;
       }
+
+      /* Hide the original React app footer inside #root as the custom index.html footer takes its place */
+      #root footer {
+        display: none !important;
+      }
+
+      /* Homepage CTA Section CSS */
+      .homepage-cta-section {
+        background-color: #0bd0f4; /* Bright brilliant cyan/sky-blue as in screenshot */
+        padding: 5rem 1.5rem;
+        text-align: center;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
+        display: none; /* Controlled dynamically by routing script */
+      }
+      .cta-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .homepage-cta-section h2 {
+        color: #040d21;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0 0 1rem 0;
+        letter-spacing: -0.015em;
+        line-height: 1.2;
+      }
+      @media (min-width: 640px) {
+        .homepage-cta-section h2 {
+          font-size: 3.25rem;
+        }
+      }
+      .cta-subtitle {
+        color: #0c1a35;
+        font-size: 1.1rem;
+        font-weight: 500;
+        line-height: 1.6;
+        margin: 0 0 1.5rem 0;
+        max-width: 700px;
+        letter-spacing: -0.01em;
+      }
+      .cta-tollfree {
+        color: #040d21;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 2.5rem 0;
+        letter-spacing: -0.015em;
+      }
+      .cta-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        width: 100%;
+        max-width: 420px;
+        justify-content: center;
+      }
+      @media (min-width: 480px) {
+        .cta-actions {
+          flex-direction: row;
+          max-width: none;
+        }
+      }
+      .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #040d21;
+        color: #ffffff !important;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        padding: 1.1rem 2.5rem;
+        border: none;
+        border-radius: 0px !important; /* perfectly sharp square corners */
+        text-transform: uppercase;
+        transition:
+          background-color 0.15s ease-in-out,
+          transform 0.1s ease-in-out;
+        cursor: pointer;
+        min-width: 220px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .cta-btn:hover {
+        background-color: #000000;
+      }
+      .cta-btn:active {
+        transform: scale(0.98);
+      }
     </style>
   </head>
   <body
     style="margin: 0; min-height: 100vh; display: flex; flex-direction: column"
   >
     <div id="root" style="flex: 1"></div>
+
+    <section id="homepage-cta" class="homepage-cta-section">
+      <div class="cta-inner">
+        <h2>Get a Free Quote Today</h2>
+        <p class="cta-subtitle">
+          Tell us your water quality problem. We'll recommend the right system —
+          no obligation.
+        </p>
+        <div class="cta-tollfree">Toll-Free: 1800 270 1121</div>
+        <div class="cta-actions">
+          <a
+            href="/contact"
+            class="cta-btn btn-request"
+            id="request-quote-cta-btn"
+            >REQUEST A QUOTE</a
+          >
+          <a
+            href="https://wa.me/919289043483"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-btn btn-whatsapp"
+            >WHATSAPP US</a
+          >
+        </div>
+      </div>
+    </section>
 
     <footer class="site-footer">
       <div class="site-footer-container">
@@ -236,5 +362,90 @@
         <a href="tel:18002701121" class="footer-bottom-phone">18002701121</a>
       </div>
     </footer>
+
+    <script>
+      (function () {
+        function getAlkalineSection() {
+          const headings = document.getElementsByTagName("h2");
+          for (let i = 0; i < headings.length; i++) {
+            if (headings[i].textContent.includes("Why Choose Alkaline")) {
+              return headings[i].closest("section");
+            }
+          }
+          return document.querySelector("section.bg-blue-50\\/50");
+        }
+
+        function checkRoute() {
+          const cta = document.getElementById("homepage-cta");
+          if (!cta) return;
+
+          const path = window.location.pathname;
+          // Show only on the homepage (e.g. "/", "/index.html", or "/" hash routing)
+          const isHome =
+            path === "/" ||
+            path === "/index.html" ||
+            window.location.hash === "#/";
+
+          if (isHome) {
+            cta.style.display = "block";
+            const target = getAlkalineSection();
+            if (target && cta.nextSibling !== target) {
+              target.parentNode.insertBefore(cta, target);
+            }
+          } else {
+            cta.style.display = "none";
+            // Move back next to body if we are on a non-home route to prevent React from breaking
+            if (cta.parentNode !== document.body) {
+              document.body.insertBefore(
+                cta,
+                document.querySelector("footer.site-footer"),
+              );
+            }
+          }
+        }
+
+        // Listen for history push/pop/replace state events
+        window.addEventListener("popstate", checkRoute);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+          originalPushState.apply(this, arguments);
+          checkRoute();
+        };
+
+        const originalReplaceState = history.replaceState;
+        history.replaceState = function () {
+          originalReplaceState.apply(this, arguments);
+          checkRoute();
+        };
+
+        // MutationObserver to safely react to virtual DOM changes or router renderings
+        const observer = new MutationObserver(checkRoute);
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+
+        // Click handler for smoothly navigating to '/contact'
+        document.addEventListener("click", function (e) {
+          if (e.target && e.target.id === "request-quote-cta-btn") {
+            e.preventDefault();
+            const headerContactLink = document.querySelector(
+              'header a[href="/contact"], nav a[href="/contact"]',
+            );
+            if (headerContactLink) {
+              headerContactLink.click();
+            } else {
+              history.pushState({}, "", "/contact");
+              window.dispatchEvent(new Event("popstate"));
+            }
+          }
+        });
+
+        // Initialize early and setup robust short-interval checks
+        window.addEventListener("DOMContentLoaded", checkRoute);
+        setInterval(checkRoute, 250);
+      })();
+    </script>
   </body>
 </html>
