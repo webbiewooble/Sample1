@@ -6,9 +6,160 @@
     <title>My Google AI Studio App</title>
     <script type="module" crossorigin src="./assets/index-CWBHOOU2.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-DQqxLPaT.css">
+    <style>
+      .site-footer {
+        background-color: #050d14;
+        color: #5e718d;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        padding: 4rem 1rem;
+      }
+      .site-footer-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .site-footer-container {
+          grid-template-columns: 1.5fr 1fr 1fr 1fr;
+          gap: 3rem;
+        }
+      }
+      .footer-logo-text {
+        color: #ffffff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+      }
+      .footer-logo-point {
+        color: #2bb4e5;
+      }
+      .footer-desc {
+        font-size: 0.875rem;
+        line-height: 1.75;
+        max-width: 300px;
+      }
+      .footer-heading {
+        color: #2bb4e5;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .footer-link {
+        color: #5e718d;
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 0.2s;
+      }
+      .footer-link:hover {
+        color: #2bb4e5;
+      }
+      .footer-contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+      }
+      .footer-contact-info.spacer {
+        margin-top: 1rem;
+      }
+      .text-highlight {
+        color: #2bb4e5;
+      }
+      .footer-bottom {
+        max-width: 1100px;
+        margin: 3rem auto 0;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(94, 113, 141, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      @media (min-width: 768px) {
+        .footer-bottom {
+          flex-direction: row;
+        }
+      }
+      .footer-copyright {
+        font-size: 0.875rem;
+      }
+      .footer-bottom-phone {
+        color: #2bb4e5;
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
+  <body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+    <div id="root" style="flex: 1;"></div>
+    
+    <footer class="site-footer">
+      <div class="site-footer-container">
+        <!-- Column 1 -->
+        <div>
+          <div class="footer-logo-text">KITA<span class="footer-logo-point">.</span></div>
+          <p class="footer-desc">Kita Systems India Pvt. Ltd. — water treatment manufacturer, Delhi. The only SS vessel water softener and sand filter manufacturer in India.</p>
+        </div>
+
+        <!-- Column 2 -->
+        <div>
+          <div class="footer-heading">PRODUCTS</div>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Water Softeners</a></li>
+            <li><a href="#" class="footer-link">Sand Filters</a></li>
+            <li><a href="#" class="footer-link">Carbon Filters</a></li>
+            <li><a href="#" class="footer-link">Iron Filters</a></li>
+            <li><a href="#" class="footer-link">Water Coolers</a></li>
+            <li><a href="#" class="footer-link">Water Purifiers</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div>
+          <div class="footer-heading">COMPANY</div>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">About Us</a></li>
+            <li><a href="#" class="footer-link">Gallery</a></li>
+            <li><a href="#" class="footer-link">Certificates</a></li>
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div>
+          <div class="footer-heading">CONTACT</div>
+          <div class="footer-contact-info">
+            <div>E-1/255, Soniya Vihar</div>
+            <div>Delhi 110094</div>
+          </div>
+          <div class="footer-contact-info spacer">
+            <div class="text-highlight">1800 270 1121</div>
+            <div>+91 92890 43483</div>
+            <div>support@kitasystems.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2024 Kita Systems India Pvt. Ltd. All rights reserved.</div>
+        <a href="tel:18002701121" class="footer-bottom-phone">18002701121</a>
+      </div>
+    </footer>
   </body>
 </html>
 
