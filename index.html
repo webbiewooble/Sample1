@@ -460,6 +460,123 @@
         text-transform: uppercase;
         white-space: nowrap;
       }
+
+      /* Reviews section styles */
+      .homepage-reviews-section {
+        background-color: #ffffff; /* Pure white background as seen in the image */
+        padding: 5rem 1.5rem;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
+        display: none; /* Controlled dynamically by routing script */
+      }
+      .reviews-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .reviews-header {
+        margin-bottom: 3.5rem;
+        text-align: left;
+      }
+      .reviews-overline {
+        color: #00a8cc; /* Beautiful bright cyan client reviews overline */
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .reviews-title {
+        color: #1a2b66; /* Deep brand navy blue */
+        font-size: 2.25rem;
+        font-weight: 850;
+        margin: 0 0 1rem 0;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
+      @media (min-width: 640px) {
+        .reviews-title {
+          font-size: 2.85rem;
+        }
+      }
+      .reviews-subtitle {
+        color: #556080; /* Slate blue-gray */
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+
+      /* Review Grid */
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      @media (min-width: 768px) {
+        .reviews-grid {
+          grid-template-columns: repeat(
+            3,
+            1fr
+          ); /* Exactly 3 cards side-by-side as in image */
+        }
+      }
+
+      /* Review Card style */
+      .review-card {
+        background-color: #ffffff;
+        border: 1px solid #e5e9f0; /* Crisp clean border exact same as image */
+        border-radius: 0.25rem; /* Soft round corners, standard minimalist */
+        padding: 2.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+        transition:
+          transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        min-height: 250px;
+      }
+      .review-card:hover {
+        transform: translateY(-4px);
+        box-shadow:
+          0 12px 20px -5px rgba(0, 0, 0, 0.04),
+          0 4px 6px -2px rgba(0, 0, 0, 0.01);
+        border-color: #ced5e0;
+      }
+
+      /* Stars Container */
+      .review-stars {
+        color: #00a8cc; /* Matches cyan color scheme in site and screenshot stars */
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.1em;
+      }
+
+      /* Quote text style */
+      .review-quote {
+        color: #4b5563; /* Elegant reading grey */
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 0 1.5rem 0;
+        flex-grow: 1;
+      }
+
+      /* Author style */
+      .review-author {
+        color: #0f172a; /* Slate 900 */
+        font-size: 0.95rem;
+        font-weight: 700; /* Bold */
+        margin: 0;
+      }
     </style>
   </head>
   <body
@@ -654,6 +771,50 @@
       </div>
     </section>
 
+    <section id="homepage-reviews" class="homepage-reviews-section">
+      <div class="reviews-container">
+        <div class="reviews-header">
+          <div class="reviews-overline">Client Reviews</div>
+          <h2 class="reviews-title">Trusted Across North India</h2>
+          <p class="reviews-subtitle">
+            5.0 rating on Google across 21 reviews. Here's what customers say.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Card 1 -->
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "The SS water softener is very nice. Great build quality and it's
+              been running perfectly."
+            </p>
+            <div class="review-author">Ankur Kumar Bhardwaj</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "Every product is best quality and affordable. If you're
+              interested, visit them soon — you won't regret it."
+            </p>
+            <div class="review-author">Pradeep Chauhan</div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "Awesome product along with the best service I have ever seen.
+              Highly recommended."
+            </p>
+            <div class="review-author">Bohra Rubber</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="homepage-cta" class="homepage-cta-section">
       <div class="cta-inner">
         <h2>Get a Free Quote Today</h2>
@@ -776,7 +937,8 @@
           const cta = document.getElementById("homepage-cta");
           const sol = document.getElementById("homepage-solutions");
           const stats = document.getElementById("homepage-stats-banner");
-          if (!cta || !sol || !stats) return;
+          const rev = document.getElementById("homepage-reviews");
+          if (!cta || !sol || !stats || !rev) return;
 
           const path = window.location.pathname;
           // Show only on the homepage (e.g. "/", "/index.html", or "/" hash routing)
@@ -789,6 +951,7 @@
             cta.style.display = "block";
             sol.style.display = "block";
             stats.style.display = "block";
+            rev.style.display = "block";
 
             const hero = getHeroSection();
             if (hero && stats.previousSibling !== hero) {
@@ -796,16 +959,22 @@
             }
 
             const target = getAlkalineSection();
-            if (target && cta.nextSibling !== target) {
-              target.parentNode.insertBefore(cta, target);
-            }
-            if (sol.nextSibling !== cta) {
-              cta.parentNode.insertBefore(sol, cta);
+            if (target) {
+              if (cta.nextSibling !== target) {
+                target.parentNode.insertBefore(cta, target);
+              }
+              if (sol.nextSibling !== cta) {
+                cta.parentNode.insertBefore(sol, cta);
+              }
+              if (target.nextSibling !== rev) {
+                target.parentNode.insertBefore(rev, target.nextSibling);
+              }
             }
           } else {
             cta.style.display = "none";
             sol.style.display = "none";
             stats.style.display = "none";
+            rev.style.display = "none";
             // Move back next to body if we are on a non-home route to prevent React from breaking
             if (cta.parentNode !== document.body) {
               document.body.insertBefore(
@@ -822,6 +991,12 @@
             if (stats.parentNode !== document.body) {
               document.body.insertBefore(
                 stats,
+                document.querySelector("footer.site-footer"),
+              );
+            }
+            if (rev.parentNode !== document.body) {
+              document.body.insertBefore(
+                rev,
                 document.querySelector("footer.site-footer"),
               );
             }
