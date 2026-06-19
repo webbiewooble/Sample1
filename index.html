@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KITA</title>
+    <title>My Google AI Studio App</title>
     <script type="module" crossorigin src="./assets/index-CWBHOOU2.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-DQqxLPaT.css" />
     <style>
@@ -178,7 +178,7 @@
       /* Homepage CTA Section CSS */
       .homepage-cta-section {
         background-color: #0bd0f4; /* Bright brilliant cyan/sky-blue as in screenshot */
-        padding: 5rem 1.5rem;
+        padding: 3rem 1.25rem;
         text-align: center;
         font-family:
           ui-sans-serif,
@@ -192,46 +192,66 @@
           sans-serif;
         display: none; /* Controlled dynamically by routing script */
       }
+      @media (min-width: 640px) {
+        .homepage-cta-section {
+          padding: 5rem 1.5rem;
+        }
+      }
       .cta-inner {
         max-width: 900px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
       }
       .homepage-cta-section h2 {
         color: #040d21;
-        font-size: 2.5rem;
+        font-size: 1.85rem;
         font-weight: 800;
         margin: 0 0 1rem 0;
         letter-spacing: -0.015em;
-        line-height: 1.2;
+        line-height: 1.25;
       }
       @media (min-width: 640px) {
         .homepage-cta-section h2 {
           font-size: 3.25rem;
+          line-height: 1.2;
         }
       }
       .cta-subtitle {
         color: #0c1a35;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 500;
-        line-height: 1.6;
-        margin: 0 0 1.5rem 0;
+        line-height: 1.5;
+        margin: 0 0 1.25rem 0;
         max-width: 700px;
         letter-spacing: -0.01em;
       }
+      @media (min-width: 640px) {
+        .cta-subtitle {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          margin: 0 0 1.5rem 0;
+        }
+      }
       .cta-tollfree {
         color: #040d21;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        margin: 0 0 2.5rem 0;
+        margin: 0 0 1.75rem 0;
         letter-spacing: -0.015em;
+      }
+      @media (min-width: 640px) {
+        .cta-tollfree {
+          font-size: 1.5rem;
+          margin: 0 0 2.5rem 0;
+        }
       }
       .cta-actions {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        gap: 1rem;
         width: 100%;
         max-width: 420px;
         justify-content: center;
@@ -240,6 +260,7 @@
         .cta-actions {
           flex-direction: row;
           max-width: none;
+          gap: 1.25rem;
         }
       }
       .cta-btn {
@@ -249,10 +270,10 @@
         background-color: #040d21;
         color: #ffffff !important;
         text-decoration: none;
-        font-size: 0.95rem;
+        font-size: 0.875rem;
         font-weight: 800;
         letter-spacing: 0.1em;
-        padding: 1.1rem 2.5rem;
+        padding: 0.9rem 1.75rem;
         border: none;
         border-radius: 0px !important; /* perfectly sharp square corners */
         text-transform: uppercase;
@@ -260,8 +281,16 @@
           background-color 0.15s ease-in-out,
           transform 0.1s ease-in-out;
         cursor: pointer;
-        min-width: 220px;
+        width: 100%;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      @media (min-width: 480px) {
+        .cta-btn {
+          width: auto;
+          min-width: 220px;
+          padding: 1.1rem 2.5rem;
+          font-size: 0.95rem;
+        }
       }
       .cta-btn:hover {
         background-color: #000000;
@@ -960,14 +989,15 @@
 
             const target = getAlkalineSection();
             if (target) {
-              if (cta.nextSibling !== target) {
-                target.parentNode.insertBefore(cta, target);
-              }
-              if (sol.nextSibling !== cta) {
-                cta.parentNode.insertBefore(sol, cta);
+              const mainElement = target.parentNode;
+              if (sol.nextSibling !== target) {
+                mainElement.insertBefore(sol, target);
               }
               if (target.nextSibling !== rev) {
-                target.parentNode.insertBefore(rev, target.nextSibling);
+                mainElement.insertBefore(rev, target.nextSibling);
+              }
+              if (mainElement && mainElement.lastElementChild !== cta) {
+                mainElement.appendChild(cta);
               }
             }
           } else {
